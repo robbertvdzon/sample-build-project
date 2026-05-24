@@ -10,6 +10,8 @@
 - [x] `gradlew` executable maken (git index + chmod)
 - [x] `docs/factory/` aanmaken en invullen
 - [x] Story-log bijwerken
+- [x] [Reviewer feedback] `.gitignore` toevoegen en `build/`+`.gradle/` uit git-index verwijderen
+- [x] [Reviewer feedback] `HomeControllerTest` met MockMvc toevoegen
 
 ## Toelichting
 
@@ -30,16 +32,17 @@ Commit succeeds. All 22 files committed on branch `ai/SP-3`.
 
 ## Samenvatting
 
-Kotlin/Spring Boot 3.2 applicatie aangemaakt met Thymeleaf als template engine. `GET /` geeft een HTML-pagina terug met `<title>Test web app</title>`, `<h1>Test web app</h1>` en de tekst `dit is een test web applicatie`. Build en `@SpringBootTest` slagen lokaal.
+Kotlin/Spring Boot 3.2 applicatie met Thymeleaf. `GET /` geeft HTML terug met `<title>Test web app</title>` en `dit is een test web applicatie`. Reviewer-feedback verwerkt: `.gitignore` toegevoegd, `build/` en `.gradle/` uit git-tracking verwijderd, en `HomeControllerTest` met MockMvc toegevoegd.
 
 ## Gedaan
 
 - **Gradle-project**: `build.gradle.kts`, `settings.gradle.kts`, `gradlew` (mode 100755), `gradlew.bat`, `gradle/wrapper/gradle-wrapper.{jar,properties}` — Gradle 8.7 + Spring Boot 3.2 + Kotlin 1.9 + Java 21
 - **Applicatiecode**: `Application.kt` (main), `HomeController.kt` (`GET /` → template `home`)
 - **Template**: `src/main/resources/templates/home.html` met vereiste titel en tekst
-- **Test**: `ApplicationTest.kt` — context loads OK
+- **Tests**: `ApplicationTest.kt` (context loads) + `HomeControllerTest.kt` (MockMvc GET / → 200, content check)
 - **Docs/factory**: alle skeleton-bestanden aangemaakt en ingevuld voor deze stack
 - **Story-log**: `docs/stories/SP-3-create-first-app.md`
+- **`.gitignore`**: `build/`, `.gradle/`, `*.class` uitgesloten; bestaande bestanden uit git-index verwijderd
 - **Lokale commit** op branch `ai/SP-3`
 
 ## Niet gedaan / aangepast
@@ -48,7 +51,3 @@ Kotlin/Spring Boot 3.2 applicatie aangemaakt met Thymeleaf als template engine. 
 - `DEFAULT_JVM_OPTS` aangepast (inner quotes verwijderd) t.o.v. standaard Gradle wrapper om JVM-classpath-fout op Linux te vermijden
 
 ---
-
-{"agent_tips_update":[{"category":"gradle","key":"gradlew_default_jvm_opts_quoting","content":"In het manueel geschreven gradlew-script moet DEFAULT_JVM_OPTS de opties zonder inner double-quotes bevatten: `DEFAULT_JVM_OPTS=\"-Xmx64m -Xms64m\"`. De standaard Gradle-wrapper gebruikt `DEFAULT_JVM_OPTS='\"…\" \"…\"'` (met inner quotes), maar die aanpak mislukt op sommige Linux-omgevingen met 'Could not find or load main class \"-Xmx64m\"'. De veiligste fix is inner quotes weglaten."}]}
-
-{"phase":"developing-finished"}
