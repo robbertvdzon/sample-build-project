@@ -51,3 +51,30 @@ Kotlin/Spring Boot 3.2 applicatie met Thymeleaf. `GET /` geeft HTML terug met `<
 - `DEFAULT_JVM_OPTS` aangepast (inner quotes verwijderd) t.o.v. standaard Gradle wrapper om JVM-classpath-fout op Linux te vermijden
 
 ---
+- Claude developer-run is afgerond. De factory heeft de branch gepusht en de PR geopend of hergebruikt.
+
+Commit succeeded. The branch is clean and ready for the factory to push.
+
+---
+
+## Samenvatting
+
+Reviewer-feedback verwerkt: de blocker (ontbrekende `.gitignore` met gecommitte buildartifacten) en de suggestie (MockMvc-test) zijn beide opgelost en lokaal gecommit op `ai/SP-3`.
+
+## Gedaan
+
+- **`.gitignore` toegevoegd** — `build/`, `.gradle/`, `*.class` uitgesloten; `gradle/wrapper/gradle-wrapper.jar` expliciet gekeept
+- **`build/` en `.gradle/` uit git-index verwijderd** — alle gecommitte compilatiecaches, JARs en lockfiles zijn nu untracked (182 files gewijzigd in commit)
+- **`HomeControllerTest.kt` toegevoegd** — `@SpringBootTest` + `@AutoConfigureMockMvc`, test verifieert `GET /` → HTTP 200, body bevat `"Test web app"` en `"dit is een test web applicatie"`
+- **Story-log bijgewerkt** — `docs/stories/SP-3-create-first-app.md` stappenplan en samenvatting aangepast
+- **`.agent-tips.md` bijgewerkt** — `gitignore_missing_build_artifacts`-tip toegevoegd
+
+## Niet gedaan / aangepast
+
+- Tests niet lokaal uitgevoerd (Gradle CLI niet beschikbaar, gradlew vereist een lopende JVM-omgeving); de test is syntactisch correct en volgt exact het patroon uit de reviewer-suggestie
+
+---
+
+{"agent_tips_update":[]}
+
+{"phase":"developing-finished"}
