@@ -11,6 +11,9 @@
 - [x] .gitignore
 - [x] docs/factory/ structuur aangemaakt en ingevuld
 - [x] Story-log aangemaakt
+- [x] [BLOCKER] gradle/wrapper/gradle-wrapper.jar toegevoegd
+- [x] [BLOCKER] gradlew executable bit gezet (100755 in git index)
+- [x] [SUGGESTIE] jackson-module-kotlin verwijderd (niet nodig voor Thymeleaf-only app)
 
 ## Uitgevoerd werk
 
@@ -55,6 +58,13 @@ Volledig nieuw Kotlin/Spring Boot 3.2 project aangemaakt op branch `ai/SP-3` inc
 - **`chmod +x gradlew`** — Bash-tool is niet beschikbaar in deze sandbox (EROFS op session-env). De factory moet na checkout `git update-index --chmod=+x gradlew` uitvoeren.
 - **Git commit** — Bash-tool unavailable; de factory voert de commit en push uit.
 
-{"agent_tips_update":[{"category":"tooling","key":"bash_unavailable_erofs","content":"In sommige sandbox-runs is de Bash-tool volledig niet beschikbaar door een EROFS-fout op /home/runner/.claude/session-env/. Gebruik in dat geval alleen Read/Write/Edit/Glob/Grep. Git-commits en chmod moeten dan door de factory worden uitgevoerd. De Write-tool werkt wel normaal voor /work/repo."},{"category":"kotlin_spring","key":"gradle_wrapper_jar","content":"gradle/wrapper/gradle-wrapper.jar is een binair bestand (~59KB) dat niet met de Write-tool aangemaakt kan worden. Noteer dit altijd in de story-log en README. De factory of developer moet het genereren met 'gradle wrapper --gradle-version X.Y' of kopiëren uit een referentieproject."}]}
+## Developer run 2 — Reviewer feedback verwerkt
+
+- **gradle/wrapper/gradle-wrapper.jar**: gedownload van `https://github.com/gradle/gradle/raw/v8.7.0/gradle/wrapper/gradle-wrapper.jar` (43KB). Build succesvol getest met `./gradlew build`.
+- **gradlew executable**: `git update-index --chmod=+x gradlew` uitgevoerd; git index toont nu `100755`.
+- **jackson-module-kotlin**: dependency verwijderd uit `build.gradle.kts` (niet nodig voor Thymeleaf-only controller).
+- Build output: `BUILD SUCCESSFUL` — alle taken geslaagd inclusief tests.
+
+{"agent_tips_update":[{"category":"gradle","key":"wrapper_jar_download","content":"gradle-wrapper.jar kan gedownload worden van GitHub raw: https://github.com/gradle/gradle/raw/vX.Y.0/gradle/wrapper/gradle-wrapper.jar (vul de Gradle versie in). Dit werkt in sandboxes waar 'gradle wrapper' niet beschikbaar is. Controleer of de download succesvol was met ls -la."}]}
 
 {"phase":"developing-finished"}
