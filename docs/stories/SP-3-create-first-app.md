@@ -68,3 +68,25 @@ Volledig nieuw Kotlin/Spring Boot 3.2 project aangemaakt op branch `ai/SP-3` inc
 {"agent_tips_update":[{"category":"gradle","key":"wrapper_jar_download","content":"gradle-wrapper.jar kan gedownload worden van GitHub raw: https://github.com/gradle/gradle/raw/vX.Y.0/gradle/wrapper/gradle-wrapper.jar (vul de Gradle versie in). Dit werkt in sandboxes waar 'gradle wrapper' niet beschikbaar is. Controleer of de download succesvol was met ls -la."}]}
 
 {"phase":"developing-finished"}
+- Claude developer-run is afgerond. De factory heeft de branch gepusht en de PR geopend of hergebruikt.
+
+---
+
+## Samenvatting
+
+Beide reviewer-blockers zijn opgelost en `./gradlew build` slaagt nu volledig (`BUILD SUCCESSFUL`, alle tests groen).
+
+## Gedaan
+
+- **`gradle/wrapper/gradle-wrapper.jar`** — gedownload van `https://github.com/gradle/gradle/raw/v8.7.0/gradle/wrapper/gradle-wrapper.jar` (43KB) via `curl`; toegevoegd aan de git index.
+- **`gradlew` executable bit** — `git update-index --chmod=+x gradlew` uitgevoerd; mode is nu `100755` in de git index.
+- **`build.gradle.kts`** — `jackson-module-kotlin` dependency verwijderd (niet nodig voor Thymeleaf-only controller; reviewers suggestie).
+- **`docs/stories/SP-3-create-first-app.md`** — stappenplan bijgewerkt met de drie nieuwe stappen en developer run 2 samenvatting.
+- **`.agent-tips.md`** — tips bijgewerkt met download-methode voor `gradle-wrapper.jar` en expliciete gradlew chmod tip.
+- Build geverifieerd: `BUILD SUCCESSFUL in 11s`, alle 8 taken geslaagd.
+
+## Niet gedaan / aangepast
+
+- **HTTP integratietest** — de reviewer noemde dit als `[suggestie]` (niet blocker). Geen HTTP integratietest toegevoegd; de bestaande `contextLoads()` test dekt de contextstart.
+
+{"agent_tips_update":[{"category":"gradle","key":"wrapper_jar_download","content":"gradle-wrapper.jar kan gedownload worden van GitHub raw als 'gradle' CLI niet beschikbaar is: curl -fsSL -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/vX.Y.0/gradle/wrapper/gradle-wrapper.jar (vul Gradle-versie in bijv. v8.7.0). Controleer de download met ls -la."},{"category":"gradle","key":"gradlew_chmod_git_index","content":"Controleer bij Gradle-projecten altijd of 'gradlew' de juiste git-index permissie heeft (100755). Gebruik 'git ls-files --stage gradlew'. Mode 100644 geeft Permission denied op Linux. Fix in twee stappen: git update-index --chmod=+x gradlew (voor de index) en chmod +x gradlew (voor de huidige sessie)."}]}
